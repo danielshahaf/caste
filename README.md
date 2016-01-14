@@ -26,7 +26,7 @@ to view the paste contents, as though by
 
 # Maturity
 
-Currently only two pastebins are known.  I'll add more as I run into them in practice.
+Currently only three pastebins are known.  I'll add more as I run into them in practice.
 
 
 # Etymology
