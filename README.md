@@ -7,6 +7,7 @@
 This happens every day on Freenode:
 
 > &lt;me&gt; jrandom: pastebin the error message you get.
+> 
 > &lt;jrandom&gt; http://pastebin.com/Yas84GQN
 
 Opening that URL gives a lot of things around the content.  The URL you really
