@@ -23,6 +23,11 @@ to view the paste contents, as though by
     curl -s http://pastebin.com/raw/Yas84GQN
 
 
+# Maturity
+
+Currently only one pastebin is known.  I'll add more as I run into them in practice.
+
+
 # Etymology
 
 Portmanteau of `cat(1)` and `paste (n.)`.
