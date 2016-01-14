@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import subprocess
+import unittest
+import re
+
+
+### Tests.
+
+class Test_Transform(unittest.TestCase):
+    def test_basic(self):
+        pairs = (
+            ('http://pastebin.com/Yas84GQN', 'http://pastebin.com/raw/Yas84GQN'),
+        )
+        for x, y in pairs:
+            self.assertEqual(transform(x), y)
+
+
+
+### Library functionality.
+REPLACEMENTS = (
+    (r'(://pastebin.com)/([A-Za-z0-9_]+)', r'\1/raw/\2'),
+)
+REPLACEMENTS = tuple(
+    (re.compile(original), modified) for original, modified in REPLACEMENTS
+)
+
+def transform(url):
+    "Transform URL by REPLACEMENTS."
+    for pattern, instead in REPLACEMENTS: 
+        url = pattern.sub(instead, url)
+    return url
+
+
+### cmdline driver.
+def main():
+    if len(sys.argv) != 2:
+        raise Exception("Usage: {} URL".format(sys.argv[0]))
+
+    url = sys.argv[1]
+    subprocess.check_call(['curl', '-s', '--', transform(url)])
+
+if __name__ == '__main__':
+    import sys
+    if sys.argv[1:2] == ['--test']: # beware of IndexError
+        sys.argv[1:2] = [] # let unittest.main() interpret any remaining arguments
+        unittest.main()
+    else:
+        main()
