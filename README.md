@@ -6,13 +6,13 @@
 
 This happens every day on Freenode:
 
-> <me> jrandom: pastebin the error message you get.
-> <jrandom> http://pastebin.com/Yas84GQN
+> &lt;me&gt; jrandom: pastebin the error message you get.
+> &lt;jrandom&gt; http://pastebin.com/Yas84GQN
 
 Opening that URL gives a lot of things around the content.  The URL you really
 want is:
 
-> <jrandom> http://pastebin.com/raw/Yas84GQN
+> &lt;jrandom&gt; http://pastebin.com/raw/Yas84GQN
 
 This project allows you to run:
 
