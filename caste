@@ -11,6 +11,7 @@ class Test_Transform(unittest.TestCase):
     def test_basic(self):
         pairs = (
             ('http://pastebin.com/Yas84GQN', 'http://pastebin.com/raw/Yas84GQN'),
+            ('http://hastebin.com/ufogotebaw.anything', 'http://hastebin.com/raw/ufogotebaw'),
         )
         for x, y in pairs:
             self.assertEqual(transform(x), y)
@@ -20,6 +21,7 @@ class Test_Transform(unittest.TestCase):
 ### Library functionality.
 REPLACEMENTS = (
     (r'(://pastebin.com)/([A-Za-z0-9_]+)', r'\1/raw/\2'),
+    (r'(://hastebin.com)/([A-Za-z0-9_]+)\..*', r'\1/raw/\2'),
 )
 REPLACEMENTS = tuple(
     (re.compile(original), modified) for original, modified in REPLACEMENTS
