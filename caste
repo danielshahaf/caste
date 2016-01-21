@@ -41,6 +41,18 @@ REPLACEMENTS = tuple(
     (re.compile(original), modified) for original, modified in REPLACEMENTS
 )
 
+
+def github_gist(url):
+    import glob
+    import tempfile
+    with tempfile.TemporaryDirectory() as wcdir:
+        subprocess.check_call(['git', 'clone', '--quiet', '--', url, wcdir])
+        files = glob.glob(wcdir+'/*')
+        if len(files) == 1:
+            subprocess.check_call(['cat', '--', files[0]])
+        else:
+            raise Exception("Gist {!r} contains more than one file; clone it manually")
+
 def transform(url):
     "Transform URL by REPLACEMENTS."
     for pattern, instead in REPLACEMENTS: 
@@ -54,7 +66,11 @@ def main():
         raise Exception("Usage: {} URL".format(sys.argv[0]))
 
     url = sys.argv[1]
-    subprocess.check_call(['curl', '-s', '--', transform(url)])
+    if '://gist.github.com/' in url:
+        github_gist(url)
+        return
+    else:
+        subprocess.check_call(['curl', '-s', '--', transform(url)])
 
 if __name__ == '__main__':
     import sys
