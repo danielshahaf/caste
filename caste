@@ -19,6 +19,7 @@ class Test_Transform(unittest.TestCase):
             ('https://bpaste.net/show/b189be90c71f', 'https://bpaste.net/raw/b189be90c71f'),
             ('https://pastebin.mozilla.org/8857253', 'https://pastebin.mozilla.org/?dl=8857253'),
             ('http://pastebin.ca/3343653', 'http://pastebin.ca/raw/3343653'),
+            ('http://pastie.org/10696241', 'http://pastie.org/pastes/10696241/download'),
         )
         for x, y in pairs:
             self.assertEqual(transform(x), y)
@@ -36,6 +37,7 @@ REPLACEMENTS = (
     (r'(://bpaste.net)/show/([a-f0-9]+)', r'\1/raw/\2'),
     (r'(://pastebin.mozilla.org)/(\d+)', r'\1/?dl=\2'),
     (r'(://pastebin.ca)/(\d+)', r'\1/raw/\2'),
+    (r'(://pastie.org)/(\d+)', r'\1/pastes/\2/download'),
 )
 REPLACEMENTS = tuple(
     (re.compile(original), modified) for original, modified in REPLACEMENTS
