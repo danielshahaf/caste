@@ -57,7 +57,7 @@ def github_gist(url):
         if len(files) == 1:
             subprocess.check_call(['cat', '--', files[0]])
         else:
-            raise Exception("Gist {!r} contains more than one file; clone it manually")
+            raise Exception("Gist {!r} contains more than one file; clone it manually".format(url))
 
 def transform(url):
     "Transform URL by REPLACEMENTS."
