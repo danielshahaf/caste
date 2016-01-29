@@ -21,6 +21,7 @@ class Test_Transform(unittest.TestCase):
             ('http://pastebin.ca/3343653', 'http://pastebin.ca/raw/3343653'),
             ('http://pastie.org/10696241', 'http://pastie.org/pastes/10696241/download'),
             ('https://paste.fedoraproject.org/313330/98546145/', 'https://paste.fedoraproject.org/313330/98546145/raw/'),
+            ('http://www.fpaste.org/316409/45410125/', 'http://www.fpaste.org/316409/45410125/raw/'),
             ('http://dpaste.com/0H3BEC4', 'http://dpaste.com/0H3BEC4.txt'),
         )
         for x, y in pairs:
@@ -41,6 +42,7 @@ REPLACEMENTS = (
     (r'(://pastebin.ca)/(\d+)', r'\1/raw/\2'),
     (r'(://pastie.org)/(\d+)', r'\1/pastes/\2/download'),
     (r'(://paste.fedoraproject.org)/(\d+/\d+)', r'\1/\2/raw'),
+    (r'(://www.fpaste.org)/(\d+/\d+)', r'\1/\2/raw'),
     (r'(://dpaste.com)/([0-9A-Z]{7,}/?)$', r'\1/\2.txt'),
 )
 REPLACEMENTS = tuple(
