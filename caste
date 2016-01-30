@@ -78,7 +78,7 @@ def main():
         github_gist(url)
         return
     else:
-        subprocess.check_call(['curl', '-s', '--', transform(url)])
+        subprocess.check_call(['curl', '-s', '-S', '--', transform(url)])
 
 if __name__ == '__main__':
     import sys
