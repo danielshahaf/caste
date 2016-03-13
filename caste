@@ -58,7 +58,7 @@ def github_gist(url):
     import glob
     import tempfile
     with tempfile.TemporaryDirectory() as wcdir:
-        subprocess.check_call(['git', 'clone', '--quiet', '--', url, wcdir])
+        subprocess.check_call(['git', 'clone', '--quiet', '--depth=1', '--', url, wcdir])
         files = glob.glob(wcdir+'/*')
         if len(files) == 1:
             subprocess.check_call(['cat', '--', files[0]])
