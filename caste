@@ -29,6 +29,14 @@ class Test_Transform(unittest.TestCase):
         for x, y in pairs:
             self.assertEqual(transform(x), y)
 
+    @unittest.expectedFailure
+    def test_already_escaped(self):
+        pairs = (
+            ('http://pastebin.com/raw/foobar', 'http://pastebin.com/raw/foobar'),
+        )
+        for x, y in pairs:
+            self.assertEqual(transform(x), y)
+
 
 
 ### Library functionality.
