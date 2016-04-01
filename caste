@@ -33,10 +33,11 @@ class Test_Transform(unittest.TestCase):
         for x, y in pairs:
             self.assertEqual(transform(x), y)
 
-    @unittest.expectedFailure
     def test_already_escaped(self):
         pairs = (
             ('http://pastebin.com/raw/foobar', 'http://pastebin.com/raw/foobar'),
+            ('http://hastebin.com/raw/ufogotebaw', 'http://hastebin.com/raw/ufogotebaw'),
+            ('http://dpaste.com/0H3BEC4.txt', 'http://dpaste.com/0H3BEC4.txt'),
         )
         for x, y in pairs:
             self.assertEqual(transform(x), y)
@@ -45,7 +46,7 @@ class Test_Transform(unittest.TestCase):
 
 ### Library functionality.
 REPLACEMENTS = (
-    (r'(://pastebin.com)/([A-Za-z0-9_]+)', r'\1/raw/\2'),
+    (r'(://pastebin.com)/([A-Za-z0-9_]{4,})', r'\1/raw/\2'),
     (r'(://hastebin.com)/([A-Za-z0-9_]+)\..*', r'\1/raw/\2'),
     (r'(://paste.debian.net)/(\d+)', r'\1/plain/\2'),
     (r'(://paste.debian.net)/hidden/([a-f0-9]+)', r'\1/plainh/\2'),
