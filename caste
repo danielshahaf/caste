@@ -31,17 +31,9 @@ class Test_Transform(unittest.TestCase):
             ('http://dpaste.com/0H3BEC4', 'http://dpaste.com/0H3BEC4.txt'),
         )
         for x, y in pairs:
-            self.assertEqual(transform(x), y)
-
-    def test_already_escaped(self):
-        pairs = (
-            ('http://pastebin.com/raw/foobar', 'http://pastebin.com/raw/foobar'),
-            ('http://hastebin.com/raw/ufogotebaw', 'http://hastebin.com/raw/ufogotebaw'),
-            ('http://dpaste.com/0H3BEC4.txt', 'http://dpaste.com/0H3BEC4.txt'),
-        )
-        for x, y in pairs:
-            self.assertEqual(transform(x), y)
-
+            f_x = transform(x)
+            self.assertEqual(f_x, y)            # correctness: f(x) == y
+            self.assertEqual(transform(f_x), y) # idempotency: f(f(x)) == y
 
 
 ### Library functionality.
