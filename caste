@@ -89,7 +89,12 @@ def main():
         github_gist(url)
         return
     else:
-        subprocess.check_call(['curl', '-s', '-S', '--', transform(url)])
+        try:
+            subprocess.check_call(['curl', '-s', '-S', '-f', '--', transform(url)])
+        except subprocess.CalledProcessError as cpe:
+            if cpe.returncode != 22:
+                # $? == 22 means 404 Not Found, in which case, curl will have printed an error.
+                raise
 
 if __name__ == '__main__':
     import sys
