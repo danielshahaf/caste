@@ -30,6 +30,7 @@ class Test_Transform(unittest.TestCase):
             ('http://www.fpaste.org/316409/45410125/', 'http://www.fpaste.org/316409/45410125/raw/'),
             ('http://dpaste.com/0H3BEC4', 'http://dpaste.com/0H3BEC4.txt'),
             ('http://codepad.org/FeZNxX6D', 'http://codepad.org/FeZNxX6D/raw.txt'),
+            ('https://thepb.in/p/GZhWromXzP7FV', 'https://thepb.in/raw/GZhWromXzP7FV'),
         )
         for x, y in pairs:
             f_x = transform(x)
@@ -55,6 +56,7 @@ REPLACEMENTS = (
     (r'(://www.fpaste.org)/(\d+/\d+)/?$', r'\1/\2/raw/'),
     (r'(://dpaste.com)/([0-9A-Z]{7,}/?)$', r'\1/\2.txt'),
     (r'(://codepad.org)/([A-Za-z0-9_]{6,})/?$', r'\1/\2/raw.txt'),
+    (r'(://thepb.in)/p/([A-Za-z0-9]{10,})', r'\1/raw/\2'),
 )
 REPLACEMENTS = tuple(
     (re.compile(original), modified) for original, modified in REPLACEMENTS
