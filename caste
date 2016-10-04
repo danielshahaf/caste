@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import re
 import subprocess
 import unittest
@@ -64,13 +65,12 @@ REPLACEMENTS = tuple(
 
 
 def github_gist(url):
-    import glob
     import tempfile
     with tempfile.TemporaryDirectory() as wcdir:
         subprocess.check_call(['git', 'clone', '--quiet', '--depth=1', '--', url, wcdir])
-        files = glob.glob(wcdir+'/*')
+        files = subprocess.check_output(['git', '-C', wcdir, 'ls-files', '-z']).rstrip(b'\0').decode().split('\0')
         if len(files) == 1:
-            subprocess.check_call(['cat', '--', files[0]])
+            subprocess.check_call(['cat', '--', os.path.join(wcdir, files[0])])
         else:
             raise Exception("Gist {!r} contains more than one file; clone it manually".format(url))
 
