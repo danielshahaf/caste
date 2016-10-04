@@ -17,11 +17,11 @@ want is:
 
 This project allows you to run:
 
-    caste http://pastebin.com/Yas84GQN
+    % caste http://pastebin.com/Yas84GQN
 
 to view the paste contents, as though by
 
-    curl -s http://pastebin.com/raw/Yas84GQN
+    % curl -s http://pastebin.com/raw/Yas84GQN
 
 
 # Maturity
