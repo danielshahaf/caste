@@ -33,6 +33,7 @@ class Test_Transform(unittest.TestCase):
             ('http://codepad.org/FeZNxX6D', 'http://codepad.org/FeZNxX6D/raw.txt'),
             ('https://thepb.in/p/GZhWromXzP7FV', 'https://thepb.in/raw/GZhWromXzP7FV'),
             ('https://dpaste.de/K5Ey', 'https://dpaste.de/K5Ey/raw'),
+            ('https://gitlab.com/snippets/1681734', 'https://gitlab.com/snippets/1681734/raw'),
         )
         for x, y in pairs:
             f_x = transform(x)
@@ -60,6 +61,7 @@ REPLACEMENTS = (
     (r'(://codepad.org)/([A-Za-z0-9_]{6,})/?$', r'\1/\2/raw.txt'),
     (r'(://thepb.in)/p/([A-Za-z0-9]{10,})', r'\1/raw/\2'),
     (r'(://dpaste.de)/([0-9A-Za-z]{4,})/?$', r'\1/\2/raw'),
+    (r'(://gitlab.com/snippets/[0-9]{4,})/?$', r'\1/raw'),
 )
 REPLACEMENTS = tuple(
     (re.compile(original), modified) for original, modified in REPLACEMENTS
