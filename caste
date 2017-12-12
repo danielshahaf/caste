@@ -36,6 +36,9 @@ class Test_Transform(unittest.TestCase):
             ('https://gitlab.com/snippets/1681734', 'https://gitlab.com/snippets/1681734/raw'),
             ('https://paste.apache.org/TPFl', 'https://paste.apache.org/TPFl?raw'), # used to auto-provide raw to curl
             ('https://paste.fedoraproject.org/paste/mjRMy5MLpnenYX9vJqQVaw', 'https://paste.fedoraproject.org/paste/mjRMy5MLpnenYX9vJqQVaw/raw'),
+            ('https://ptpb.pw/~dana:usage-help.gZzAhtoX/diff', 'https://ptpb.pw/~dana:usage-help.gZzAhtoX'),
+            ('https://ptpb.pw/nDzv.DJE6ziPr/diff', 'https://ptpb.pw/nDzv.DJE6ziPr'),
+            ('https://ptpb.pw/nDzv.DJE6ziPr', 'https://ptpb.pw/nDzv.DJE6ziPr'),
         )
         for x, y in pairs:
             f_x = transform(x)
@@ -66,6 +69,7 @@ REPLACEMENTS = (
     (r'(://gitlab.com/snippets/[0-9]{4,})/?$', r'\1/raw'),
     (r'(://paste.apache.org)/([0-9A-Za-z]{4,})/?$', r'\1/\2?raw'),
     (r'(://paste.fedoraproject.org)/(paste/[^/]{4,})/?$', r'\1/\2/raw'),
+    (r'(://ptpb.pw)/([A-Za-z0-9.]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
 )
 REPLACEMENTS = tuple(
     (re.compile(original), modified) for original, modified in REPLACEMENTS
