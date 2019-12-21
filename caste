@@ -31,6 +31,7 @@ del excepthook
 ### Tests.
 
 class Test_Transform(unittest.TestCase):
+    # TODO: add a test for the excepthook functionality (just the error messages, without tracebacks)
     def test_basic(self):
         pairs = (
             ('http://pastebin.com/Yas84GQN', 'http://pastebin.com/raw/Yas84GQN'),
