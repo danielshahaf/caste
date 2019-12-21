@@ -8,14 +8,20 @@ import unittest
 
 
 ### Exception classes and handling
-class UnsupportedURLException(Exception):
+class CasteException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return self.msg
+
+class UnsupportedURLException(CasteException):
     def __init__(self, url):
         self.url = url
     def __str__(self):
         return "caste: URL {!r} is not supported".format(self.url)
 
 def excepthook(type_, instance, traceback):
-    if isinstance(instance, UnsupportedURLException):
+    if isinstance(instance, CasteException):
         sys.stderr.write(str(instance) + "\n")
     else:
         sys.__excepthook__(type_, instance, traceback)
