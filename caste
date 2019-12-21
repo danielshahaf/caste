@@ -12,13 +12,12 @@ class CasteException(Exception):
     def __init__(self, msg):
         self.msg = msg
     def __str__(self):
-        return self.msg
+        return "caste: " + self.msg
 
 class UnsupportedURLException(CasteException):
-    def __init__(self, url):
-        self.url = url
     def __str__(self):
-        return "caste: URL {!r} is not supported".format(self.url)
+        self.msg = "URL {!r} is not supported".format(self.msg)
+        return super().__str__()
 
 def excepthook(type_, instance, traceback):
     if isinstance(instance, CasteException):
@@ -112,7 +111,7 @@ def github_gist(url):
         if len(files) == 1:
             subprocess.check_call(['cat', '--', os.path.join(wcdir, files[0])])
         else:
-            raise CasteException("caste: Gist {!r} contains more than one file; clone it manually".format(url))
+            raise CasteException("Gist {!r} contains more than one file; clone it manually".format(url))
 
 def transform(url):
     "Transform URL by REPLACEMENTS."
@@ -128,7 +127,7 @@ def transform(url):
 ### cmdline driver.
 def main():
     if len(sys.argv) != 2:
-        raise CasteException("caste: Usage: {} URL".format(sys.argv[0]))
+        raise CasteException("Usage: {} URL".format(sys.argv[0]))
 
     url = sys.argv[1]
     if '://gist.github.com/' in url:
