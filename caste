@@ -3,7 +3,24 @@
 import os
 import re
 import subprocess
+import sys
 import unittest
+
+
+### Exception classes and handling
+class UnsupportedURLException(Exception):
+    def __init__(self, url):
+        self.url = url
+    def __str__(self):
+        return "caste: URL {!r} is not supported".format(self.url)
+
+def excepthook(type_, instance, traceback):
+    if isinstance(instance, UnsupportedURLException):
+        sys.stderr.write(str(instance) + "\n")
+    else:
+        sys.__excepthook__(type_, instance, traceback)
+sys.excepthook = excepthook
+del excepthook
 
 
 ### Tests.
@@ -41,9 +58,12 @@ class Test_Transform(unittest.TestCase):
             ('https://ptpb.pw/nDzv.DJE6ziPr', 'https://ptpb.pw/nDzv.DJE6ziPr'),
         )
         for x, y in pairs:
-            f_x = transform(x)
-            self.assertEqual(f_x, y)            # correctness: f(x) == y
-            self.assertEqual(transform(f_x), y) # idempotency: f(f(x)) == y
+            if y is None:
+                self.assertRaises(UnsupportedURLException, transform, x)
+            else:
+                f_x = transform(x)
+                self.assertEqual(f_x, y)            # correctness: f(x) == y
+                self.assertEqual(transform(f_x), y) # idempotency: f(f(x)) == y
 
 
 ### Library functionality.
@@ -89,7 +109,11 @@ def github_gist(url):
 def transform(url):
     "Transform URL by REPLACEMENTS."
     for pattern, instead in REPLACEMENTS: 
-        url = pattern.sub(instead, url)
+        if instead is None:
+            if pattern.search(url):
+                raise UnsupportedURLException(url)
+        else:
+            url = pattern.sub(instead, url)
     return url
 
 
