@@ -63,6 +63,7 @@ class Test_Transform(unittest.TestCase):
             ('https://ptpb.pw/nDzv.DJE6ziPr/diff', 'https://ptpb.pw/nDzv.DJE6ziPr'),
             ('https://ptpb.pw/nDzv.DJE6ziPr', 'https://ptpb.pw/nDzv.DJE6ziPr'),
             ('https://privatebin.net/?448cfdc9d3ab7ddd#7iTj1Wr8SAcvDTAujvVZX8VMMpeQFxsga5xqhJkg7gs4', None),
+            ('https://pb.dana.is/nDzv.DJE6ziPr', 'https://pb.dana.is/nDzv.DJE6ziPr'),
         )
         for x, y in pairs:
             if y is None:
@@ -97,6 +98,7 @@ REPLACEMENTS = (
     (r'(://paste.apache.org)/([0-9A-Za-z]{4,})/?$', r'\1/\2?raw'),
     (r'(://paste.fedoraproject.org)/(paste/[^/]{4,})/?$', r'\1/\2/raw'),
     (r'(://ptpb.pw)/([A-Za-z0-9.]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
+    (r'(://pb.dana.is)/([A-Za-z0-9.]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
     (r'://privatebin.net/', None), # requires javascript
 )
 REPLACEMENTS = tuple(
