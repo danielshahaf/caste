@@ -47,6 +47,7 @@ class Test_Transform(unittest.TestCase):
             ('http://paste.opensuse.org/85382826', 'http://paste.opensuse.org/view/raw/85382826'),
             ('http://susepaste.org/77951426', 'http://susepaste.org/view/raw/77951426'),
             ('https://bpaste.net/show/b189be90c71f', 'https://bpaste.net/raw/b189be90c71f'),
+            ('https://bpaste.net/YIIQ', 'https://bpaste.net/raw/YIIQ'),
             ('https://pastebin.mozilla.org/8857253', 'https://pastebin.mozilla.org/?dl=8857253'),
             ('http://pastebin.ca/3343653', 'http://pastebin.ca/raw/3343653'),
             ('http://pastie.org/10696241', 'http://pastie.org/pastes/10696241/download'),
@@ -84,7 +85,9 @@ REPLACEMENTS = (
     (r'(://paste.grml.org)/hidden/([a-f0-9]+)', r'\1/plainh/\2'),
     (r'(://paste.opensuse.org)/(\d+)', r'\1/view/raw/\2'),
     (r'(://susepaste.org)/(\d+)', r'\1/view/raw/\2'),
+    # Beware: the /show part would happily match both patterns (and be substituted twice) if not for the $ anchoring.
     (r'(://bpaste.net)/show/([a-f0-9]+)', r'\1/raw/\2'),
+    (r'(://bpaste.net)/([A-Za-z0-9]+)$', r'\1/raw/\2'),
     (r'(://pastebin.mozilla.org)/(\d+)', r'\1/?dl=\2'),
     (r'(://pastebin.ca)/(\d+)', r'\1/raw/\2'),
     (r'(://pastie.org)/(\d+)', r'\1/pastes/\2/download'),
