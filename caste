@@ -65,6 +65,7 @@ class Test_Transform(unittest.TestCase):
             ('https://ptpb.pw/nDzv.DJE6ziPr', 'https://ptpb.pw/nDzv.DJE6ziPr'),
             ('https://privatebin.net/?448cfdc9d3ab7ddd#7iTj1Wr8SAcvDTAujvVZX8VMMpeQFxsga5xqhJkg7gs4', None),
             ('https://pb.dana.is/nDzv.DJE6ziPr', 'https://pb.dana.is/nDzv.DJE6ziPr'),
+            ('https://pb.dana.is/jC-t.4659/sh', 'https://pb.dana.is/jC-t.4659'),
         )
         for x, y in pairs:
             if y is None:
@@ -100,8 +101,8 @@ REPLACEMENTS = (
     (r'(://gitlab.com/snippets/[0-9]{4,})/?$', r'\1/raw'),
     (r'(://paste.apache.org)/([0-9A-Za-z]{4,})/?$', r'\1/\2?raw'),
     (r'(://paste.fedoraproject.org)/(paste/[^/]{4,})/?$', r'\1/\2/raw'),
-    (r'(://ptpb.pw)/([A-Za-z0-9._]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
-    (r'(://pb.dana.is)/([A-Za-z0-9._]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
+    (r'(://ptpb.pw)/([A-Za-z0-9._-]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
+    (r'(://pb.dana.is)/([A-Za-z0-9._-]{4,}|[~][^/]+)(/.*)?', r'\1/\2'),
     (r'://privatebin.net/', None), # requires javascript
 )
 REPLACEMENTS = tuple(
